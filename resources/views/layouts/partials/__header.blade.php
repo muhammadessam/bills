@@ -20,6 +20,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="{{asset('adminassets/plugins/table/datatable/datatables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('adminassets/plugins/table/datatable/dt-global_style.css')}}">
+
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -32,6 +35,7 @@
 
 @livewireStyles
 
+@stack('css')
 <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>

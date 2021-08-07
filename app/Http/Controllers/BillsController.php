@@ -4,80 +4,58 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Yajra\DataTables\DataTables;
 
 class BillsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        if (\request()->ajax()) {
+            return DataTables::of(Bill::with(['user'])->orderBy('created_at', 'desc'))
+                ->editColumn('user_id', function (Bill $bill) {
+                    return $bill->user->name;
+                })->editColumn('status', function (Bill $bill) {
+                    return $bill->status === "open" ? '<span class="badge badge-info">' . $bill->status . '</span>' : '<span class="badge badge-success">' . $bill->status . '</span>';
+                })->addColumn('photo', function (Bill $bill) {
+                    return $bill->hasMedia('bill') ? '<img width="175" height="115" class="rounded" src="' . $bill->getFirstMediaUrl('bill') . '"/>' : '<img width="175" height="115" class="rounded" src="' . asset('adminassets/assets/img/175x115.jpg') . '">';
+                })->addColumn('actions', function (Bill $bill) {
+                    return '';
+                })->rawColumns(['actions', 'status', 'photo'])->make(true);
+        }
+        return view('admin.bills.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return \view('admin.bills.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Bill $bill
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Bill $bill)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Bill $bill
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Bill $bill)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Bill $bill
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Bill $bill)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Bill $bill
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Bill $bill)
     {
         //

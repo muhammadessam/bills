@@ -23,6 +23,7 @@ class BouncerSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => \Hash::make('password'),
+            'phone' => '011112313',
         ])->assign('admin');
     }
 }
