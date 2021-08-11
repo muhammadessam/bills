@@ -24,6 +24,7 @@ class BouncerSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => \Hash::make('password'),
             'phone' => '011112313',
+            'whatsapp' => '131321313'
         ])->assign('admin');
     }
 }

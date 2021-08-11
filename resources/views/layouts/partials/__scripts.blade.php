@@ -16,5 +16,6 @@
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 <script src="{{asset('adminassets/plugins/table/datatable/datatables.js')}}"></script>
+@include('sweetalert::alert')
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 @stack('js')

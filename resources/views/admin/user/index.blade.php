@@ -1,13 +1,13 @@
 @extends('layouts.master')
-@section('title', 'المدير / الفواتير')
+@section('title', 'المدير / العملاء')
 @section('content')
     <div class="col-lg-12 col-md-12 layout-spacing">
         <div class="statbox widget box box-shadow">
             <div class="widget-header">
                 <div class="row" style="height: 70px;">
                     <div class="col d-flex justify-content-between align-self-center">
-                        <h2>الفواتير</h2>
-                        <a class="btn btn-primary" href="{{route('admin.bill.create')}}"><i data-feather="plus"></i></a>
+                        <h2>العملاء</h2>
+                        <a class="btn btn-primary" href="{{route('admin.user.create')}}"><i data-feather="plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -17,12 +17,12 @@
                         <thead>
                         <tr>
                             <th>التسلسل</th>
-                            <th>رقم الفاتورة</th>
-                            <th>قيمة الفاتورة</th>
-                            <th>حالة الفاتورة</th>
-                            <th>تاريخ الاصدار</th>
-                            <th>العميل</th>
-                            <th>صورة الفاتورةالاصلية</th>
+                            <th>اسم العميل</th>
+                            <th>عدد الفواتير المفتوحة</th>
+                            <th>عدد الفواتير المغلقة</th>
+                            <th>رقم الهاتف</th>
+                            <th>الواتس اب</th>
+                            <th>البريد</th>
                             <th>اجراءات</th>
                         </tr>
                         </thead>
@@ -40,15 +40,15 @@
             processing: true,
             serverSide: true,
             search: true,
-            ajax: "{{route('admin.bill.index')}}",
+            ajax: "{{route('admin.user.index')}}",
             columns: [
                 {data: 'id'},
-                {data: 'number'},
-                {data: 'amount'},
-                {data: 'status'},
-                {data: 'released_at'},
-                {data: 'user_id'},
-                {data: 'photo'},
+                {data: 'name'},
+                {data: 'openedCount'},
+                {data: 'closedCount'},
+                {data: 'phone'},
+                {data: 'whatsapp'},
+                {data: 'email'},
                 {data: 'actions', orderable: false, searchable: false},
             ],
             "oLanguage": {

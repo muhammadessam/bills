@@ -18,8 +18,9 @@ namespace App\Models{
  * @property string $number
  * @property string $amount
  * @property string $status
- * @property string|null $released_at
+ * @property mixed|null $released_at
  * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
@@ -28,15 +29,19 @@ namespace App\Models{
  * @method static \Database\Factories\BillFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Bill onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill query()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereReleasedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|Bill withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Bill withoutTrashed()
  */
 	class Bill extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
@@ -58,6 +63,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $phone
+ * @property string $whatsapp
  * @property-read \Illuminate\Database\Eloquent\Collection|\Silber\Bouncer\Database\Ability[] $abilities
  * @property-read int|null $abilities_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bill[] $bills
@@ -89,6 +95,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereWhatsapp($value)
  */
 	class User extends \Eloquent {}
 }

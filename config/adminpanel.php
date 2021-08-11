@@ -9,6 +9,12 @@ return [
             'route' => 'admin.bill.index',
         ],
         [
+            'name' => 'المدفوعات',
+            'type' => 'single',
+            'icon' => 'dollar-sign',
+            'route' => 'admin.payment.index',
+        ],
+        [
             'name' => 'المستخدمين',
             'type' => 'single',
             'icon' => 'users',

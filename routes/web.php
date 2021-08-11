@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BillsController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.dashboard');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->as('admin.')->group(function () {
+
     Route::get('dashboard', function () {
         return view('layouts.master');
     })->name('dashboard');
+
     Route::resource('bill', BillsController::class);
     Route::resource('user', UsersController::class);
+    Route::resource('payment', PaymentsController::class);
+
 });

@@ -10,13 +10,16 @@ class AddsInfoToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone');
+            $table->string('whatsapp');
         });
     }
 
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('phone');
+            $table->dropColumn('whatsapp');
+
         });
     }
 }
