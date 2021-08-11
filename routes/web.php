@@ -26,8 +26,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->as('admin.')->
         return view('layouts.master');
     })->name('dashboard');
 
-    Route::resource('bill', BillsController::class);
+    Route::resource('bill', BillsController::class)->except('update', 'store');
     Route::resource('user', UsersController::class);
     Route::resource('payment', PaymentsController::class);
+
+    Route::get('get-user-bills/{user}', [UsersController::class, 'getUserBills'])->name('get.user.bills');
 
 });

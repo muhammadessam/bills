@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('adminassets/plugins/table/datatable/datatables.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('adminassets/plugins/table/datatable/dt-global_style.css')}}">
+    <link href="{{asset('adminassets/plugins/file-upload/file-upload-with-preview.min.css')}}" rel="stylesheet" type="text/css"/>
 
     <style>
         body {

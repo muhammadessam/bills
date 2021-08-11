@@ -16,6 +16,8 @@
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 <script src="{{asset('adminassets/plugins/table/datatable/datatables.js')}}"></script>
+<script src="{{asset('adminassets/plugins/file-upload/file-upload-with-preview.min.js')}}"></script>
+
 @include('sweetalert::alert')
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 @stack('js')

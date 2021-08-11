@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bill;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Yajra\DataTables\DataTables;
 
 class UsersController extends Controller
@@ -12,7 +17,7 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|Response|DataTables
      */
     public function index()
     {
@@ -25,6 +30,7 @@ class UsersController extends Controller
                 })
                 ->addColumn('actions', function (User $user) {
                     return '<div class="d-flex">' .
+                        '<a href="' . route('admin.user.show', $user->id) . '" class="btn btn-success mr-1">مشاهدة</a>' .
                         '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-info mr-1">تحرير</a>' .
                         '<form method="POST" action="' . route('admin.user.destroy', $user->id) . '">' .
                         csrf_field() . method_field('DELETE') .
@@ -35,22 +41,11 @@ class UsersController extends Controller
         return view('admin.user.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.user.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -64,36 +59,17 @@ class UsersController extends Controller
         return redirect()->route('admin.user.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param User $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user)
     {
-        //
+        return view('admin.user.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param User $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         return view('admin.user.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param User $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
@@ -106,16 +82,28 @@ class UsersController extends Controller
         return redirect()->route('admin.user.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param User $user
-     * @return RedirectResponse
-     */
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();
         toast('تم الحذف بنجاح', 'success')->autoClose(1000);
         return back();
+    }
+
+    public function getUserBills(Request $request, User $user)
+    {
+        return DataTables::of($user->bills()->orderBy('id', 'desc'))
+            ->editColumn('status', function (Bill $bill) {
+                return $bill->status === "open" ? '<span class="badge badge-info">' . $bill->status . '</span>' : '<span class="badge badge-success">' . $bill->status . '</span>';
+            })->addColumn('photo', function (Bill $bill) {
+                return $bill->hasMedia('bills') ? '<img width="175" height="115" class="rounded" src="' . $bill->getFirstMediaUrl('bills') . '"/>' : '<img width="175" height="115" class="rounded" src="' . asset('adminassets/assets/img/175x115.jpg') . '">';
+            })->addColumn('actions', function (Bill $bill) {
+                return '<div class="d-flex">' .
+                    '<a href="' . route('admin.bill.show', $bill->id) . '" class="btn btn-success mr-1">مشاهدة</a>' .
+                    '<a href="' . route('admin.bill.edit', $bill->id) . '" class="btn btn-info mr-1">تحرير</a>' .
+                    '<form method="POST" action="' . route('admin.bill.destroy', $bill->id) . '">' .
+                    csrf_field() . method_field('DELETE') .
+                    '<button type="submit" class="btn btn-danger">حذف</button>'
+                    . '</form>' . '</div>';
+            })->rawColumns(['actions', 'status', 'photo'])->make(true);
     }
 }

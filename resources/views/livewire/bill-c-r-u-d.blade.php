@@ -3,7 +3,11 @@
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4>انشاء فاتورة جديدة</h4>
+                    @if($bill->exists)
+                        <h4>تعديل الفاتورة رقم : {{$bill->number}}</h4>
+                    @else
+                        <h4>انشاء فاتورة جديدة</h4>
+                    @endif
                 </div>
             </div>
         </div>
@@ -45,6 +49,23 @@
                     @error('bill.released_at')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
+                </div>
+            </div>
+
+            <div class="form-row mb-4">
+                <div class="custom-file-container" data-upload-id="bill-photo">
+                    <label class="btn btn-primary" for="photo">اختر صورة الفاتورة</label>
+                    <input wire:model="photo" id="photo" type="file" class="d-none" accept="image/*">
+                    @if($photo)
+                        <button class="btn btn-danger" wire:click="$set('photo',null)">حذف الصورة</button>
+                    @endif
+                    <div>
+                        @if($photo)
+                            <img style="width: 250px;height: 250px;" class="img-thumbnail border border-2" src="{{$photo->temporaryUrl()}}" alt="">
+                        @elseif($bill->exists)
+                            <img style="width: 250px;height: 250px;" class="img-thumbnail border border-2" src="{{$bill->getFirstMediaUrl('bills')}}" alt="">
+                        @endif
+                    </div>
                 </div>
             </div>
 

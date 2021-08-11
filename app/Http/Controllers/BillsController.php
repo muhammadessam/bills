@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Yajra\DataTables\DataTables;
@@ -10,6 +12,9 @@ use Yajra\DataTables\DataTables;
 class BillsController extends Controller
 {
 
+    /**
+     * @throws Exception
+     */
     public function index()
     {
         if (\request()->ajax()) {
@@ -19,7 +24,7 @@ class BillsController extends Controller
                 })->editColumn('status', function (Bill $bill) {
                     return $bill->status === "open" ? '<span class="badge badge-info">' . $bill->status . '</span>' : '<span class="badge badge-success">' . $bill->status . '</span>';
                 })->addColumn('photo', function (Bill $bill) {
-                    return $bill->hasMedia('bill') ? '<img width="175" height="115" class="rounded" src="' . $bill->getFirstMediaUrl('bill') . '"/>' : '<img width="175" height="115" class="rounded" src="' . asset('adminassets/assets/img/175x115.jpg') . '">';
+                    return $bill->hasMedia('bills') ? '<img width="175" height="115" class="rounded" src="' . $bill->getFirstMediaUrl('bills') . '"/>' : '<img width="175" height="115" class="rounded" src="' . asset('adminassets/assets/img/175x115.jpg') . '">';
                 })->addColumn('actions', function (Bill $bill) {
                     return '<div class="d-flex">' .
                         '<a href="' . route('admin.bill.show', $bill->id) . '" class="btn btn-success mr-1">مشاهدة</a>' .
@@ -40,15 +45,9 @@ class BillsController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-
     public function show(Bill $bill)
     {
-        //
+        return \view('admin.bills.show', compact('bill'));
     }
 
     public function edit(Bill $bill)
@@ -56,13 +55,8 @@ class BillsController extends Controller
         return \view('admin.bills.edit', compact('bill'));
     }
 
-    public function update(Request $request, Bill $bill)
-    {
-        //
-    }
 
-
-    public function destroy(Bill $bill)
+    public function destroy(Bill $bill): RedirectResponse
     {
         $bill->delete();
         toast('تم الحذف بنجاح', 'success', 'top-start')->autoClose(1000);
