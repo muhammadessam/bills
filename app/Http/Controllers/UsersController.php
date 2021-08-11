@@ -19,9 +19,9 @@ class UsersController extends Controller
         if (\request()->ajax()) {
             return DataTables::of(User::with(['bills'])->orderBy('id', 'desc'))
                 ->addColumn('openedCount', function (User $user) {
-                    return '<span class="badge badge-success">' . $user->bills()->where('status', 'open')->count() . '</span>';
+                    return '<span class="badge badge-success">' . $user->bills->where('status', 'open')->count() . '</span>';
                 })->addColumn('closedCount', function (User $user) {
-                    return '<span class="badge badge-danger">' . $user->bills()->where('status', 'closed')->count() . '</span>';
+                    return '<span class="badge badge-danger">' . $user->bills->where('status', 'closed')->count() . '</span>';
                 })
                 ->addColumn('actions', function (User $user) {
                     return '<div class="d-flex">' .
