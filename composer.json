@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "anlutro/l4-settings": "^1.0",
+        "fakerphp/faker": "^1.9.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -21,8 +22,7 @@
         "realrashid/sweet-alert": "^4.0",
         "silber/bouncer": "v1.0.0-rc.10",
         "spatie/laravel-medialibrary": "^9.0.0",
-        "yajra/laravel-datatables-oracle": "~9.0",
-        "fakerphp/faker": "^1.9.1"
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

@@ -22,10 +22,13 @@
                 <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                     <div class="">
                         <div class="dropdown-item">
-                            <a href="#"><i data-feather="settings"></i>الاعدات</a>
+                            <a href="{{route('admin.settings.index')}}"><i data-feather="settings"></i>الاعدات</a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="#"><i data-feather="log-out"></i>تسجيل الخروج</a>
+                            <form action="{{route('logout')}}" method="post" class="d-flex" style="height: 41px">
+                                @csrf
+                                <button type="submit" class="border-0 w-100 bg-transparent"><i data-feather="log-out"></i>تسجيل الخروج</button>
+                            </form>
                         </div>
                     </div>
                 </div>

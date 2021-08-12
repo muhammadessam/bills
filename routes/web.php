@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BillsController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,5 +33,6 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->as('admin.')->
 
     Route::get('get-user-bills/{user}', [UsersController::class, 'getUserBills'])->name('get.user.bills');
     Route::get('get-bill-payments/{bill}', [BillsController::class, 'getBillPayment'])->name('get.bill.payment');
-
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('settings', [SettingController::class, 'save'])->name('settings.store');
 });
