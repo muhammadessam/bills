@@ -31,5 +31,6 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->as('admin.')->
     Route::resource('payment', PaymentsController::class);
 
     Route::get('get-user-bills/{user}', [UsersController::class, 'getUserBills'])->name('get.user.bills');
+    Route::get('get-bill-payments/{bill}', [BillsController::class, 'getBillPayment'])->name('get.bill.payment');
 
 });

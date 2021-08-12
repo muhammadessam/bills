@@ -12,6 +12,10 @@ class Payment extends Model implements HasMedia
 
     use InteractsWithMedia;
 
+    protected $fillable = ['amount', 'bill_id', 'released_at'];
+    protected $dateFormat = 'Y/m/d';
+    protected $casts = ['released_at' => 'date:Y-m-d'];
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('payments')->singleFile();
