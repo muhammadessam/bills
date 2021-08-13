@@ -40,7 +40,6 @@
                 <div class="row" style="height: 70px;">
                     <div class="col d-flex justify-content-between align-self-center">
                         <h2>المدفوعات</h2>
-                        <a class="btn btn-primary" href="{{route('admin.payment.create')}}"><i data-feather="plus"></i></a>
                     </div>
                 </div>
             </div>

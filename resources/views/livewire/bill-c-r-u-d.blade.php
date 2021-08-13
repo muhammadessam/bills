@@ -34,7 +34,7 @@
             <div class="form-row mb-4">
                 <div class="form-group col-md-6">
                     <label for="status">حالة الفاتورة</label>
-                    <select id="status" class="selectpicker form-control" style="padding: 8px 10px;" wire:model="bill.status">
+                    <select id="status" class="form-control" style="padding: 8px 10px;" wire:model="bill.status">
                         @foreach(\App\Models\Bill::STATUS as $key=>$status)
                             <option value="{{$key}}">{{$status}}</option>
                         @endforeach
@@ -126,7 +126,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="user_id">اختر عميل</label>
-                        <select id="user_id" class="selectpicker form-control" data-live-search="true" style="padding: 8px 10px;" wire:model="bill.user_id">
+                        <select id="user_id" class="form-control"  style="padding: 8px 10px;" wire:model="bill.user_id">
                             @foreach(\App\Models\User::all() as $user)
                                 <option value="{{$user['id']}}">{{$user['name']}}</option>
                             @endforeach
