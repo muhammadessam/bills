@@ -13,12 +13,18 @@ class SendNotificationCommand extends Command
 
     protected $description = 'This command will send all notifications to all open bills users';
 
-    public function handle()
+    public function handle(): void
     {
-        $bills = Bill::with('user')->where('status', 'open')->whereDate('released_at','>=', now()->add)->get();
+        $bills = Bill::with('user')->where('status', 'open')->whereDate('released_at', '<=', now()->subDays(setting('notify_when')))->get();
         foreach ($bills as $bill) {
             if ($bill->user->is_email) {
                 \Mail::to($bill->user->email)->send(new BillStillOpenMail($bill));
+            }
+            if ($bill->user->is_sms) {
+
+            }
+            if ($bill->user->is_whatsapp) {
+
             }
         }
     }

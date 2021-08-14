@@ -36,7 +36,8 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->as('admin.')->
     Route::get('get-bill-payments/{bill}', [BillsController::class, 'getBillPayment'])->name('get.bill.payment');
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'save'])->name('settings.store');
-    Route::get('send-message', function () {
+    Route::get('test', function () {
+        dd(         Bill::with('user')->where('status', 'open')->whereDate('released_at', '<=', now()->subDays(setting('notify_when')))->get());
     })->name('send.user.msg');
 
 

@@ -26,8 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('bills:send')->da;
+        $schedule->command('bills:send')->cron('13 0 */' . setting('notify_every') . ' * *');
     }
 
     /**
