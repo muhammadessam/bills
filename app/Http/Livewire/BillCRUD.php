@@ -37,6 +37,9 @@ class BillCRUD extends Component
                 'user.email' => 'required|email',
                 'user.phone' => ['required', Rule::unique('users', 'phone')->ignore($this->user->id)],
                 'user.whatsapp' => 'required',
+                'user.is_sms' => [],
+                'user.is_email' => [],
+                'user.is_whatsapp' => [],
             ];
     }
 

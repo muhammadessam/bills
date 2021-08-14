@@ -21,18 +21,15 @@ class UsersController extends Controller
      */
     public function index()
     {
-        /**
-         * ->addColumn('actions', function (User $user) {
-         * return '<div class="d-flex">' .
-         * '<a href="' . route('admin.user.show', $user->id) . '" class="btn btn-success mr-1">مشاهدة</a>' .
-         * '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-info mr-1">تحرير</a>' .
-         * '<form method="POST" action="' . route('admin.user.destroy', $user->id) . '">' .
-         * csrf_field() . method_field('DELETE') .
-         * '<button type="submit" class="btn btn-danger">حذف</button>'
-         * . '</form>' . '</div>';
-         */
         if (\request()->ajax()) {
             return DataTables::of(User::with(['bills'])->orderBy('id', 'desc'))
+                ->addColumn('via_whatsapp', function (User $user) {
+                    return $user->is_whatsapp ? '<span class="badge badge-success">YES</span>' : '<span class="badge badge-danger">NO</span>';
+                })->addColumn('via_sms', function (User $user) {
+                    return $user->is_sms ? '<span class="badge badge-success">YES</span>' : '<span class="badge badge-danger">NO</span>';
+                })->addColumn('via_email', function (User $user) {
+                    return $user->is_email ? '<span class="badge badge-success">YES</span>' : '<span class="badge badge-danger">NO</span>';
+                })
                 ->addColumn('openedCount', function (User $user) {
                     return '<span class="badge badge-success">' . $user->bills()->where('status', 'open')->count() . '</span>';
                 })->addColumn('closedCount', function (User $user) {
@@ -46,7 +43,7 @@ class UsersController extends Controller
                         csrf_field() . method_field('DELETE') .
                         '<button type="submit" class="btn btn-danger" title="حذف"><i data-feather="trash"></i></button>'
                         . '</form>' . '</div>';
-                })->rawColumns(['actions', 'openedCount', 'closedCount'])->make(true);
+                })->rawColumns(['actions', 'openedCount', 'closedCount', 'via_whatsapp', 'via_sms', 'via_email'])->make(true);
         }
         return view('admin.user.index');
     }
@@ -64,6 +61,10 @@ class UsersController extends Controller
             'whatsapp' => 'required',
             'email' => 'required',
         ]);
+        $request['is_sms'] ?? 0;
+        $request['is_whatsapp'] ?? 0;
+        $request['is_email'] ?? 0;
+
         User::create($request->all());
         toast('تم الانشاء بنجاح', 'success')->autoClose(1000);
         return redirect()->route('admin.user.index');
@@ -87,6 +88,9 @@ class UsersController extends Controller
             'whatsapp' => 'required',
             'email' => 'required',
         ]);
+        $request['is_sms'] ?? 0;
+        $request['is_whatsapp'] ?? 0;
+        $request['is_email'] ?? 0;
         $user->update($request->all());
         toast('تم الحفظ بنجاح', 'success')->autoClose(1000);
         return redirect()->route('admin.user.index');

@@ -31,7 +31,8 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'whatsapp'
+        'whatsapp',
+        'is_sms', 'is_whatsapp', 'is_email'
     ];
 
     /**

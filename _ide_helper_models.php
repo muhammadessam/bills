@@ -52,12 +52,24 @@ namespace App\Models{
 /**
  * App\Models\Payment
  *
+ * @property int $id
+ * @property float $amount
+ * @property mixed $released_at
+ * @property int $bill_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Bill $bill
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
  * @property-read int|null $media_count
  * @method static \Illuminate\Database\Eloquent\Builder|Payment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Payment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Payment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereBillId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereReleasedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
  */
 	class Payment extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
@@ -80,6 +92,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $phone
  * @property string $whatsapp
+ * @property int|null $is_sms
+ * @property int|null $is_whatsapp
+ * @property int|null $is_email
  * @property-read \Illuminate\Database\Eloquent\Collection|\Silber\Bouncer\Database\Ability[] $abilities
  * @property-read int|null $abilities_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bill[] $bills
@@ -102,7 +117,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIs($role)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAll($role)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsNot($role)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsSms($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsWhatsapp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)

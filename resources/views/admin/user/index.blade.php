@@ -23,6 +23,9 @@
                             <th>رقم الهاتف</th>
                             <th>الواتس اب</th>
                             <th>البريد</th>
+                            <th>عبر الواتس</th>
+                            <th>عبر الرسايل</th>
+                            <th>عبر الايميل</th>
                             <th>اجراءات</th>
                         </tr>
                         </thead>
@@ -49,6 +52,9 @@
                 {data: 'phone'},
                 {data: 'whatsapp'},
                 {data: 'email'},
+                {data: 'via_whatsapp'},
+                {data: 'via_sms'},
+                {data: 'via_email'},
                 {data: 'actions', orderable: false, searchable: false},
             ],
             "oLanguage": {

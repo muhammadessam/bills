@@ -122,11 +122,35 @@
                         @enderror
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="n-chk">
+                        <label class="new-control new-checkbox checkbox-primary">
+                            <input name="is_sms" type="checkbox" wire:model="user.is_sms" class="new-control-input">
+                            <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير sms
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="n-chk">
+                        <label class="new-control new-checkbox checkbox-primary">
+                            <input name="is_email" type="checkbox" wire:model="user.is_email" class="new-control-input">
+                            <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير البريد الالكتروني
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="n-chk">
+                        <label class="new-control new-checkbox checkbox-primary">
+                            <input name="is_whatsapp" type="checkbox" wire:model="user.is_whatsapp" class="new-control-input">
+                            <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير whatsapp
+                        </label>
+                    </div>
+                </div>
             @else
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="user_id">اختر عميل</label>
-                        <select id="user_id" class="form-control"  style="padding: 8px 10px;" wire:model="bill.user_id">
+                        <select id="user_id" class="form-control" style="padding: 8px 10px;" wire:model="bill.user_id">
                             @foreach(\App\Models\User::all() as $user)
                                 <option value="{{$user['id']}}">{{$user['name']}}</option>
                             @endforeach

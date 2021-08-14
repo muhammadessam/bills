@@ -19,6 +19,30 @@
                     <x-input-show value="{{$user->whatsapp}}" classes="col-md-6" label="رقم الواتس اب: "></x-input-show>
                     <x-input-show value="{{$user->email}}" classes="col-md-6" label="البريد: "></x-input-show>
                 </div>
+                <div class="form-row">
+                    <div class="n-chk">
+                        <label class="new-control new-checkbox checkbox-primary">
+                            <input name="is_sms" type="checkbox" disabled value="1" {{old('is_sms', $user->is_sms) ? 'checked' : ''}} class="new-control-input">
+                            <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير sms
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="n-chk">
+                        <label class="new-control new-checkbox checkbox-primary">
+                            <input name="is_email" type="checkbox" disabled value="1" {{old('is_sms', $user->is_email) ? 'checked' : ''}} class="new-control-input">
+                            <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير البريد الالكتروني
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="n-chk">
+                        <label class="new-control new-checkbox checkbox-primary">
+                            <input name="is_whatsapp" type="checkbox" disabled value="1" {{old('is_sms', $user->is_whatsapp) ? 'checked' : ''}} class="new-control-input">
+                            <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير whatsapp
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

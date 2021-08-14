@@ -46,6 +46,30 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="n-chk">
+                            <label class="new-control new-checkbox checkbox-primary">
+                                <input name="is_sms" type="checkbox" value="1" {{old('is_sms', '')==1 ? 'checked' : ''}} class="new-control-input">
+                                <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير sms
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="n-chk">
+                            <label class="new-control new-checkbox checkbox-primary">
+                                <input name="is_email" type="checkbox" value="1" {{old('is_sms', '')==1 ? 'checked' : ''}} class="new-control-input">
+                                <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير البريد الالكتروني
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="n-chk">
+                            <label class="new-control new-checkbox checkbox-primary">
+                                <input name="is_whatsapp" type="checkbox" value="1" {{old('is_sms', '')==1 ? 'checked' : ''}} class="new-control-input">
+                                <span class="new-control-indicator"></span>يمكن استقبال الرسائل عير whatsapp
+                            </label>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary float-right">حفظ</button>
                 </form>
             </div>
