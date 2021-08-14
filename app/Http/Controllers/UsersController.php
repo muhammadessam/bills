@@ -21,6 +21,16 @@ class UsersController extends Controller
      */
     public function index()
     {
+        /**
+         * ->addColumn('actions', function (User $user) {
+         * return '<div class="d-flex">' .
+         * '<a href="' . route('admin.user.show', $user->id) . '" class="btn btn-success mr-1">مشاهدة</a>' .
+         * '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-info mr-1">تحرير</a>' .
+         * '<form method="POST" action="' . route('admin.user.destroy', $user->id) . '">' .
+         * csrf_field() . method_field('DELETE') .
+         * '<button type="submit" class="btn btn-danger">حذف</button>'
+         * . '</form>' . '</div>';
+         */
         if (\request()->ajax()) {
             return DataTables::of(User::with(['bills'])->orderBy('id', 'desc'))
                 ->addColumn('openedCount', function (User $user) {
@@ -28,13 +38,12 @@ class UsersController extends Controller
                 })->addColumn('closedCount', function (User $user) {
                     return '<span class="badge badge-danger">' . $user->bills()->where('status', 'closed')->count() . '</span>';
                 })->addColumn('actions', function (User $user) {
-                    return '<div class="d-flex">' .
-                        '<a href="' . route('admin.user.show', $user->id) . '" class="btn btn-success mr-1">مشاهدة</a>' .
-                        '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-info mr-1">تحرير</a>' .
-                        '<form method="POST" action="' . route('admin.user.destroy', $user->id) . '">' .
-                        csrf_field() . method_field('DELETE') .
-                        '<button type="submit" class="btn btn-danger">حذف</button>'
-                        . '</form>' . '</div>';
+                    return \view('admin.datatables.actions', [
+                        'user' => $user,
+                        'edit' => route('admin.user.edit', $user),
+                        'show' => route('admin.user.show', $user),
+                        'destroy' => route('admin.user.destroy', $user)
+                    ]);
                 })->rawColumns(['actions', 'openedCount', 'closedCount'])->make(true);
         }
         return view('admin.user.index');

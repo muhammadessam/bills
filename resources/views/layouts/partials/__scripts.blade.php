@@ -13,7 +13,8 @@
 </script>
 <script src="{{asset('adminassets/assets/js/custom.js')}}"></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
-
+<script src="{{asset('adminassets/plugins/highlight/highlight.pack.js')}}"></script>
+<script src="{{asset('adminassets/assets/js/scrollspyNav.js')}}"></script>
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 <script src="{{asset('adminassets/plugins/table/datatable/datatables.js')}}"></script>
 <script src="{{asset('adminassets/plugins/file-upload/file-upload-with-preview.min.js')}}"></script>

@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
@@ -26,7 +27,7 @@ class BillCRUD extends Component
     {
         return
             [
-                'bill.number' => 'required|unique:bills,number,' . $this->bill->id,
+                'bill.number' => ['required', Rule::unique('bills', 'number')->ignore($this->bill->id)],
                 'bill.amount' => 'required|numeric',
                 'bill.status' => 'required|in:closed,open',
                 'bill.released_at' => 'required|date',
@@ -34,7 +35,7 @@ class BillCRUD extends Component
 
                 'user.name' => 'required',
                 'user.email' => 'required|email',
-                'user.phone' => 'required|unique:users,phone,' . $this->user->id,
+                'user.phone' => ['required', Rule::unique('users', 'phone')->ignore($this->user->id)],
                 'user.whatsapp' => 'required',
             ];
     }
