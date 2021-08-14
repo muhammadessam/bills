@@ -22,10 +22,10 @@ class PaymentsController extends Controller
                     return $payment->hasMedia('payments') ? '<img width="175" height="115" class="rounded" src="' . $payment->getFirstMediaUrl('payments') . '"/>' : '<img width="175" height="115" class="rounded" src="' . asset('adminassets/assets/img/175x115.jpg') . '">';
                 })->addColumn('actions', function (Payment $payment) {
                     return '<div class="d-flex">' .
-                        '<a href="' . route('admin.payment.edit', $payment) . '" class="btn btn-info mr-1">تحرير</a>' .
+                        '<a href="' . route('admin.payment.edit', $payment) . '" class="btn btn-info mr-1"><i data-feather="edit"></i></a>' .
                         '<form method="POST" action="' . route('admin.payment.destroy', $payment) . '">' .
                         csrf_field() . method_field('DELETE') .
-                        '<button type="submit" class="btn btn-danger">حذف</button>'
+                        '<button type="submit" class="btn btn-danger"><i data-feather="trash"></i></button>'
                         . '</form>' . '</div>';
                 })->rawColumns(['actions', 'photo'])->make(true);
         }

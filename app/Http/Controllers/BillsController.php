@@ -27,12 +27,13 @@ class BillsController extends Controller
                 })->addColumn('photo', function (Bill $bill) {
                     return $bill->hasMedia('bills') ? '<img width="175" height="115" class="rounded" src="' . $bill->getFirstMediaUrl('bills') . '"/>' : '<img width="175" height="115" class="rounded" src="' . asset('adminassets/assets/img/175x115.jpg') . '">';
                 })->addColumn('actions', function (Bill $bill) {
-                    return '<div class="d-flex">' .
-                        '<a href="' . route('admin.bill.show', $bill->id) . '" class="btn btn-success mr-1">مشاهدة</a>' .
-                        '<a href="' . route('admin.bill.edit', $bill->id) . '" class="btn btn-info mr-1">تحرير</a>' .
+                    return
+                        '<div class="d-flex">' .
+                        '<a href="' . route('admin.bill.show', $bill->id) . '" class="btn btn-success mr-1" title="مشاهده"><i data-feather="eye"></i></a>' .
+                        '<a href="' . route('admin.bill.edit', $bill->id) . '" class="btn btn-info mr-1" title="تعديل"><i data-feather="edit"></i></a>' .
                         '<form method="POST" action="' . route('admin.bill.destroy', $bill->id) . '">' .
                         csrf_field() . method_field('DELETE') .
-                        '<button type="submit" class="btn btn-danger">حذف</button>'
+                        '<button type="submit" class="btn btn-danger" title="حذف"><i data-feather="trash"></i></button>'
                         . '</form>' . '</div>';
                 })->rawColumns(['actions', 'status', 'photo'])->make(true);
         }
@@ -77,7 +78,7 @@ class BillsController extends Controller
                 return '<div class="d-flex">' .
                     '<form method="POST" action="' . route('admin.payment.destroy', $payment) . '">' .
                     csrf_field() . method_field('DELETE') .
-                    '<button type="submit" class="btn btn-danger">حذف</button>'
+                    '<button type="submit" class="btn btn-danger"><i data-feather="trash"></i></button>'
                     . '</form>' . '</div>';
             })->rawColumns(['actions', 'photo'])->make(true);
     }

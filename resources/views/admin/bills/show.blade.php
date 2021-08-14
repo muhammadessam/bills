@@ -67,7 +67,7 @@
 @endsection
 @push('js')
     <script>
-        $('#payments-table').DataTable({
+        let payment = $('#payments-table').DataTable({
             processing: true,
             serverSide: true,
             search: true,
@@ -95,5 +95,8 @@
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 7
         });
+        payment.on('draw.dt', function () {
+            feather.replace();
+        })
     </script>
 @endpush

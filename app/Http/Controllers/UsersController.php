@@ -38,12 +38,14 @@ class UsersController extends Controller
                 })->addColumn('closedCount', function (User $user) {
                     return '<span class="badge badge-danger">' . $user->bills()->where('status', 'closed')->count() . '</span>';
                 })->addColumn('actions', function (User $user) {
-                    return \view('admin.datatables.actions', [
-                        'user' => $user,
-                        'edit' => route('admin.user.edit', $user),
-                        'show' => route('admin.user.show', $user),
-                        'destroy' => route('admin.user.destroy', $user)
-                    ]);
+                    return
+                        '<div class="d-flex">' .
+                        '<a href="' . route('admin.user.show', $user->id) . '"  title="مشاهدة" class="btn btn-success mr-1"><i data-feather="eye"></i></a>' .
+                        '<a href="' . route('admin.user.edit', $user->id) . '"  title="تعديل" class="btn btn-info mr-1"><i data-feather="edit"></i></a>' .
+                        '<form method="POST" action="' . route('admin.user.destroy', $user->id) . '">' .
+                        csrf_field() . method_field('DELETE') .
+                        '<button type="submit" class="btn btn-danger" title="حذف"><i data-feather="trash"></i></button>'
+                        . '</form>' . '</div>';
                 })->rawColumns(['actions', 'openedCount', 'closedCount'])->make(true);
         }
         return view('admin.user.index');

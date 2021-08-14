@@ -13,7 +13,7 @@
             </div>
             <div class="widget-content widget-content-area">
                 <div class="table-responsive">
-                    <table class="table table-bordered mb-4" id="bills-table">
+                    <table class="table table-bordered mb-4" id="user-table">
                         <thead>
                         <tr>
                             <th>التسلسل</th>
@@ -36,7 +36,7 @@
 @endsection
 @push('js')
     <script>
-        $('#bills-table').DataTable({
+        let users = $('#users-table').DataTable({
             processing: true,
             serverSide: true,
             search: true,
@@ -65,5 +65,8 @@
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 7
         });
+        users.on('draw.dt', function () {
+            feather.replace();
+        })
     </script>
 @endpush

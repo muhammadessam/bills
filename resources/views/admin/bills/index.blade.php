@@ -36,7 +36,7 @@
 @endsection
 @push('js')
     <script>
-        $('#bills-table').DataTable({
+        let bills = $('#bills-table').DataTable({
             processing: true,
             serverSide: true,
             search: true,
@@ -65,5 +65,8 @@
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 7
         });
+        bills.on('draw.dt', function () {
+            feather.replace();
+        })
     </script>
 @endpush
