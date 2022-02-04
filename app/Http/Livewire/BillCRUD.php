@@ -67,7 +67,7 @@ class BillCRUD extends Component
         }
         if ($this->photo) {
             try {
-                $this->bill->addMedia($this->photo->getRealPath())->toMediaCollection('bills');
+                $this->bill->addMedia($this->photo)->preservingOriginal()->toMediaCollection('bills');
             } catch (FileDoesNotExist $e) {
                 return 'Photo never upload due to file does not exist please contact support';
             } catch (FileIsTooBig $e) {
